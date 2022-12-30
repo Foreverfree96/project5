@@ -2,61 +2,58 @@
 // fetch is syntactic sugar - sweet - wrapper around xmlHttpRequest
 // fetch is promise-based
 
-const baseUrl = 'http://localhost:3000/api/products/';
+const baseUrl = "http://localhost:3000/api/products/";
 fetch(baseUrl)
   .then((response) => response.json()) // implicit return
   .then((data) => {
     console.log(data);
-    
+
     makeCards(data);
-  });
-  
+  })
+  .catch((error) => console.log(error));
 
 function makeCards(dataArray) {
-  // whatever you pass into dataArray is used in its place 
+  // whatever you pass into dataArray is used in its place
   // parameters are like variables
-  const items = document.getElementById('items');
-  
+  const items = document.getElementById("items");
+
   for (let i = 0; i < dataArray.length; i++) {
     const card = makeCard(dataArray[i]);
     items.appendChild(card);
   }
-
 }
 
 function makeCard(dataObj) {
   // declare variable and stash created elements inside
-  const link = document.createElement('a');
-  const container = document.createElement('article');
+  const link = document.createElement("a");
+  const container = document.createElement("article");
+  const img = document.createElement("img");
+  const name = document.createElement("h3");
+  const description = document.createElement("p");
 
-  const img = document.createElement('img');
-  const name = document.createElement('h3');
-  const description = document.createElement('p');
-  
-  
   // add content
   name.innerHTML = dataObj.name;
   description.innerHTML = dataObj.description;
 
   // add classes
-  name.classList.add('productName');
-  description.classList.add('productDescription');
+  name.classList.add("productName");
+  description.classList.add("productDescription");
 
-  const productURL = './product.html?id=' + dataObj._id;
+  const productUrl = "./product.html?id=" + dataObj._id;
   // set attributes for the  a tags
-  link.setAttribute('href', productURL);
+
+  link.setAttribute("href", productUrl);
   link.appendChild(description);
-  console.log('link');
-  
-  // // set attribute for the img tags
-  const imageURL =  '/http://localhost:3000/images/'  + dataObj.imageURL;
-  link.setAttribute('img', 'src',  imageURL);
+
+  // set attribute for the img tags
+
+  const imageUrl = dataObj.imageUrl;
+  img.setAttribute("src", imageUrl);
   link.appendChild(img);
-  console.log(img, 'imageURL');
+  console.log(imageUrl);
 
+  // return card here
 
-  // return card here 
- 
   //how to get the right id into the link for each card
   // string concatenation - query parameters
 
@@ -64,13 +61,11 @@ function makeCard(dataObj) {
   container.appendChild(img);
   container.appendChild(name);
   container.appendChild(description);
-  
+
+  // creates container to link elements into one
   link.appendChild(container);
 
   // return the link element
   console.log(link);
   return link;
-  
-
 }
-
