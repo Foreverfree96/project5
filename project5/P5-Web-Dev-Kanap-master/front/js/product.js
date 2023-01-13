@@ -26,7 +26,6 @@ const singleProduct = {
   color: "",
   quantity: 1,
   id: "",
-  price: 0,
 };
 
 fetch(dataUrl)
@@ -45,7 +44,6 @@ function initSingleProduct(dataObj) {
   singleProduct.altTxt = dataObj.altTxt;
   singleProduct.name = dataObj.name;
   singleProduct.id = dataObj._id;
-  singleProduct.price = dataObj.price;
 }
 
 function createCard(dataObj) {
