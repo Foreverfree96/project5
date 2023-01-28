@@ -304,7 +304,7 @@ function checkEmail() {
     emailIsValid = false;
   }
 }
-
+// ----
 // ----------------------------------
 // A function with event listener to submit the order button
 function submitForProducts() {
