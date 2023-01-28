@@ -245,11 +245,17 @@ function eventListenersForForm() {
   email.addEventListener("keyup", checkEmail);
   console.log(email);
   orderBttn.addEventListener("click", (event) => {
-    submitForProducts(event);
+    if (!objBuildForForm.test(orderBttn)) {
+      // If the code is invalid, prevent the default action (submitting the form)
+      event.preventDefault();
+      alert("The form has invalid entries");
+    } else {
+      thatPage.href;
+      alert("Thank you for your purchase!");
+    }
+    console.log(orderBttn);
   });
-  console.log(orderBttn);
 }
-
 // ----------------------------------
 // Create a Functions to handle errors
 
@@ -302,7 +308,7 @@ function checkEmail() {
 // ----------------------------------
 // A function with event listener to submit the order button
 function submitForProducts() {
-  event.preventDefault();
+  // event.preventDefault();
   // Build the object
   const objBuildForForm = {
     contact: {
@@ -342,12 +348,12 @@ function submitForProducts() {
       );
       thatPage.searchParams.append("orderId", JSON.stringify(data.orderId));
       window.location.href = thatPage.href;
+      submitForProducts();
     })
     .catch((error) => console.error(error))
     .catch((error) => console.log(error));
-
-  console.log(thatPage.href, window.location.href);
 }
+// console.log(thatPage.href, window.location.href);
 // TODO: Write a conditional statement to validate products to send
 // we have an orderId generating for the user after clicking the commander - orderBttn can find the orderID ctrlClick
 // we need to redirect the order ID with url search params and update it to the confirmation page.
