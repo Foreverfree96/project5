@@ -233,6 +233,7 @@ const emailRegex =
 
 // ----------------------------------
 // Assign Eventlisteners to listen for a Key-up
+
 function eventListenersForForm() {
   fName.addEventListener("keyup", checkFirstName);
   console.log(fName, "click");
@@ -245,14 +246,8 @@ function eventListenersForForm() {
   email.addEventListener("keyup", checkEmail);
   console.log(email);
   orderBttn.addEventListener("click", (event) => {
-    if (!objBuildForForm.test(orderBttn)) {
-      // If the code is invalid, prevent the default action (submitting the form)
-      event.preventDefault();
-      alert("The form has invalid entries");
-    } else {
-      thatPage.href;
-      alert("Thank you for your purchase!");
-    }
+    submitForProducts(event);
+
     console.log(orderBttn);
   });
 }
@@ -307,7 +302,8 @@ function checkEmail() {
 // ----
 // ----------------------------------
 // A function with event listener to submit the order button
-function submitForProducts() {
+function submitForProducts(event) {
+  event.preventDefault();
   // event.preventDefault();
   // Build the object
   const objBuildForForm = {
@@ -321,9 +317,11 @@ function submitForProducts() {
     // get the id's in the cartArray and insert them into products
     products: [],
   };
+
   for (let i = 0; i < cartArray.length; i++) {
     objBuildForForm.products.push(cartArray[i].id);
   }
+
   console.log(fName, fName.value);
   // get the information out of the input fields from the form
   objBuildForForm.contact.firstName = fName.value;
@@ -342,13 +340,24 @@ function submitForProducts() {
   })
     .then((response) => response.json())
     .then((data) => {
+      if (
+        firstNameIsValid &&
+        lastNameisValid &&
+        addressIsValid &&
+        cityIsValid &&
+        emailIsValid
+      ) {
+        let thatPage = new URL(
+          "http://127.0.0.1:5501/project5/P5-Web-Dev-Kanap-master/front/html/confirmation.html"
+        );
+        thatPage.searchParams.append("orderId", JSON.stringify(data.orderId));
+        localStorage.removeItem("cartArray");
+        window.location.href = thatPage.href;
+        alert("Thank you for your purchase!");
+      } else {
+        alert("The form has invalid entries");
+      }
       console.log(data);
-      let thatPage = new URL(
-        "http://127.0.0.1:5501/project5/P5-Web-Dev-Kanap-master/front/html/confirmation.html"
-      );
-      thatPage.searchParams.append("orderId", JSON.stringify(data.orderId));
-      window.location.href = thatPage.href;
-      submitForProducts();
     })
     .catch((error) => console.error(error))
     .catch((error) => console.log(error));

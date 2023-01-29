@@ -1,5 +1,9 @@
-// orderId = document.getElementById("orderId");
-// console.log(orderId);
-// function orderConfirmation() {
-//   orderId.target.value = URLSearchParams.get(id);
-// }
+const idDiv = document.getElementById("orderId");
+
+console.log("connected");
+let urlSearchParams = new URLSearchParams(window.location.search);
+let params = Object.fromEntries(urlSearchParams.entries());
+console.log(params.orderId);
+idDiv.innerText = params.orderId;
+
+let id = params.orderId;
