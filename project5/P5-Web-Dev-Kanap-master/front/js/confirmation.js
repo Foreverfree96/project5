@@ -5,5 +5,3 @@ let urlSearchParams = new URLSearchParams(window.location.search);
 let params = Object.fromEntries(urlSearchParams.entries());
 console.log(params.orderId);
 idDiv.innerText = params.orderId;
-
-let id = params.orderId;

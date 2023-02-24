@@ -143,7 +143,7 @@ function totalCartArticles() {
   // console.log(Object.keys(priceObject));
   for (let i = 0; i < cartArray.length; i++) {
     // console.log(cartArray[i].id);
-    // console.log(priceObject[cartArray[i].id], cartArray[i].quantity);
+
     total += parseInt(cartArray[i].quantity, 10);
   }
   totalArticles.innerText = total;
@@ -163,7 +163,6 @@ function totalCartPrice() {
 // ---------------------------------
 
 // ---------------------------------
-// Assign classes from HTML and insert them into variables to be used in javascript
 
 // console.log(orderBttn);
 
@@ -196,14 +195,7 @@ function addTheEventListener() {
 }
 // ---------------------------------
 // Assign classes from HTML and insert them into variables to be used in javascript
-// ---------------------------------
-// Most likely unused variables that I don't need.
 
-// const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-// const lastNameErrorMsg = document.getElementById("firstNameErrorMsg");
-// const addressErrorMsg = document.getElementById("addressErrorMsg");
-// const cityErrorMsg = document.getElementById("cityErrorMsg");
-// const emailErrorMsg = document.getElementById("emailErrorMsg");
 // ---------------------------------
 const fName = document.getElementById("firstName");
 const lName = document.getElementById("lastName");
@@ -363,7 +355,5 @@ function submitForProducts(event) {
     .catch((error) => console.log(error));
 }
 // console.log(thatPage.href, window.location.href);
-// TODO: Write a conditional statement to validate products to send
-// we have an orderId generating for the user after clicking the commander - orderBttn can find the orderID ctrlClick
-// we need to redirect the order ID with url search params and update it to the confirmation page.
+
 // ----------------------------------
